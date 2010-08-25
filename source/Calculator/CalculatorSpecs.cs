@@ -43,4 +43,18 @@ namespace Calculator
 		It should_divide_the_left_operand_with_the_right_operand =
 			() => Result.ShouldEqual(20);
 	}
+
+	[Subject(typeof(Calculator))]
+	public class When_two_numbers_are_multiplied
+	{
+		static Calculator Calculator;
+		static int Result;
+
+		Establish context = () => { Calculator = new Calculator(); };
+
+		Because of = () => { Result = Calculator.Multiply(40, 2); };
+
+		It should_multiply_both_operands =
+			() => Result.ShouldEqual(80);
+	}
 }
