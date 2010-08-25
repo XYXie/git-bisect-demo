@@ -1,6 +1,4 @@
 require 'rake/clean'
-require 'configatron'
-require 'dictionary'
 Dir.glob(File.join(File.dirname(__FILE__), 'tools/Rake/*.rb')).each do |f|
 	require f
 end
@@ -19,20 +17,16 @@ CLOBBER.include('source/**/bin')
 namespace :compile do
 	desc 'Compiles the application'
 	task :app => [:clobber] do
-		FileList.new("source/**/*.csproj").each do |project|
-			MSBuild.compile :project => project
-		end
+		MSBuild.compile :project => "source/Calculator/Calculator.csproj"
 	end
 end
 
 namespace :tests do
 	desc 'Runs unit tests'
 	task :run => ['compile:app'] do
-		FileList.new("build/tests/**/Calculator*.dll").each do |assembly|
-			Mspec.run \
-				:tool => "tools/Machine.Specifications/mspec.exe",
-				:reportdirectory => "build/test-results",
-				:assembly => assembly
-		end
+		Mspec.run \
+			:tool => "tools/Machine.Specifications/mspec.exe",
+			:reportdirectory => "build/test-results",
+			:assembly => "build/tests/Calculator.dll"
 	end
 end
