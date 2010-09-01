@@ -44,6 +44,9 @@
     <Compile Include="CalculatorSpecs.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Reproduction.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
